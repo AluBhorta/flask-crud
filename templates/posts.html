@@ -2,12 +2,13 @@
 
 {% block body %}
 <h1>Posts</h1>
+<button onclick="addNewPost()" class="btn new-post-btn waves-effect">Create New Post</button>
 
-<ul class="collection">
+<ul class="collection hoverable">
 {% for post in posts %}
-  <li class="collection-item">
-    <a href="/post/{{post.id}}">{{ post.title }}</a>  
-  </li>
+<a href="/post/{{post.id}}" class="collection-item">
+  {{ post.title }}
+</a>  
 {% endfor %} 
 </ul>
 

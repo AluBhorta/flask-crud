@@ -1,9 +1,10 @@
-from flask import Flask, jsonify, render_template
+from flask import Flask, render_template, request, jsonify
 from db.sampledata import posts as Posts
 
 # init app
 app = Flask(__name__)
 app.debug = True
+
 
 # routes
 @app.route("/")
@@ -16,18 +17,21 @@ def about():
     return render_template('about.html')
 
 
-@app.route("/posts")
+@app.route("/posts" , methods=["GET", "POST"])
 def posts():
-    # ###
-    #
-    # query db and fetch posts
+    if request.method == "POST":
+        post_id = request.json['id']
+        title = request.json['title']
+        body = request.json['body']
+        Posts.append({
+            "id": post_id,
+            "title": title,
+            "body": body
+        })
     return render_template('posts.html', posts=Posts)
 
 
 @app.route("/post/<post_id>")
-# ###
-#
-# query db and fetch post with id=id
 def post(post_id):
     for post in Posts:
         if int(post['id']) == int(post_id):
