@@ -1,8 +1,14 @@
-{% extends 'layout.html' %} {% block body %}
+{% extends 'layout.html' %} 
+
+{% block body %}
 <h1>Posts</h1>
-<p>
-  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsam nobis aut,
-  sequi magni, totam minima officiis maxime hic alias suscipit voluptates
-  doloremque soluta dolores vitae qui non, quos veritatis recusandae.
-</p>
+
+<ul class="collection">
+{% for post in posts %}
+  <li class="collection-item">
+    <a href="/post/{{post.id}}">{{ post.title }}</a>  
+  </li>
+{% endfor %} 
+</ul>
+
 {% endblock %}

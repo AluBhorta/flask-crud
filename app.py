@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, render_template
-import os
+from db.sampledata import posts as Posts
 
 # init app
 app = Flask(__name__)
@@ -18,7 +18,22 @@ def about():
 
 @app.route("/posts")
 def posts():
-    return render_template('posts.html')
+    # ###
+    #
+    # query db and fetch posts
+    return render_template('posts.html', posts=Posts)
+
+
+@app.route("/post/<post_id>")
+# ###
+#
+# query db and fetch post with id=id
+def post(post_id):
+    for post in Posts:
+        if int(post['id']) == int(post_id):
+            return render_template('post.html', post=post)
+    return render_template("error404.html", message="Invalid Post ID")
+
 
 
 # run app
