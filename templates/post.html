@@ -3,10 +3,12 @@
 {% block body %}
 
 <div class="card center-align ">
-  <div class="card-title">{{post.title}}</div>
+  <div class="card-title">
+    <h4>{{post.title}}</h4>
+  </div>
   <button onclick="deletePost()" class="btn delete-btn waves-effect" >Delete Post</button>
   <button onclick="updatePost()" class="btn update-btn waves-effect" >Update Post</button>
-  <p class="card-content pink lighten-2">{{post.body}}</p>
+  <p class="card-content purple lighten-4">{{post.body}}</p>
 </div>
 
 {% endblock %}

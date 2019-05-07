@@ -1,4 +1,8 @@
 from flask import Flask, render_template, request, jsonify
+from flask_sqlalchemy import SQLAlchemy
+from flask_marshmallow import Marshmallow
+import os
+# 
 from db.sampledata import posts as Posts
 
 # init app
@@ -23,7 +27,8 @@ def posts():
         post_id = request.json['id']
         title = request.json['title']
         body = request.json['body']
-        Posts.append({
+        from db.sampledata import post
+        post.append({
             "id": post_id,
             "title": title,
             "body": body
@@ -31,14 +36,14 @@ def posts():
     return render_template('posts.html', posts=Posts)
 
 
-@app.route("/post/<post_id>")
+@app.route("/post/<post_id>", methods=["GET", "PUT", "DELETE"])
 def post(post_id):
-    for post in Posts:
-        if int(post['id']) == int(post_id):
-            return render_template('post.html', post=post)
-    return render_template("error404.html", message="Invalid Post ID")
-
-
+    if request.method == "GET":
+        for post in Posts:
+            if int(post['id']) == int(post_id):
+                return render_template('post.html', post=post)
+        return render_template("error404.html", message="Invalid Post ID")
+    
 
 # run app
 if __name__ == "__main__":
