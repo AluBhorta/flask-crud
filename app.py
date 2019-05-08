@@ -88,10 +88,16 @@ def post(post_id):
         db.session.commit()
         return redirect(url_for('posts'))
     elif request.method == "PUT":
-        pass
-        # ###
-        #
-        # implement put
+        title = request.json['title']
+        body = request.json['body']
+
+        post = Post.query.get(post_id)
+        if title:
+            post.title = title
+        post.body = body
+
+        db.session.commit()
+        return redirect(url_for('posts'))
 
 
 # run app
