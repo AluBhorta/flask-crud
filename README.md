@@ -2,15 +2,21 @@
 
 Simple CRUD application using the Python microframework - Flask.
 
+## Quick start
 
-## Still to implement
+```bash
+# Activate venv
+$ pipenv shell
 
-- implement a db: sqlite/mysql/pgsql
-- delete post
-- update post
-- front end
-  - modal for - Add new post
-  - confirm dialog for delete
+# Install dependencies
+$ pipenv install
 
-### Run the app
-> python app.py
+# Create DB
+$ python
+>> from app import db
+>> db.create_all()
+>> exit()
+
+# Run Server (http://localhst:5000)
+python app.py
+```
