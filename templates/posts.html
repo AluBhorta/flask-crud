@@ -1,15 +1,29 @@
-{% extends 'layout.html' %} 
-
-{% block body %}
+{% extends 'layout.html' %} {% block body %}
 <h1>Posts</h1>
-<button onclick="addNewPost()" class="btn new-post-btn waves-effect">Create New Post</button>
 
+<div class="new-post-form">
+  <h4>Add New Post</h4>
+    <form>
+      <input type="text" placeholder="Enter Post title" id="input-title" />
+      <input type="text" placeholder="Enter Post body" id="input-body" />
+      <button onclick="addNewPost()" class="btn new-post-btn waves-effect">
+        Create New Post
+      </button>
+    </form>
+  </div>
+  <div >
+  </div>
+</div>
+
+<br><br>
+<div class="container">
 <ul class="collection hoverable">
-{% for post in posts %}
-<a href="/post/{{post.id}}" class="collection-item">
-  {{ post.title }}
-</a>  
-{% endfor %} 
+  {% for post in posts %}
+  <a href="/post/{{post.id}}" class="collection-item">
+    {{ post.title }}
+  </a>
+  {% endfor %}
 </ul>
+</div>
 
 {% endblock %}

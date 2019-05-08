@@ -1,32 +1,45 @@
+const inputTitle = document.getElementById("input-title");
+const inputBody = document.getElementById("input-body");
 
-let data = {
-  "id": "8",
-  "title": "Post Eight",
-  "body": "Is this getting boring?"
-}
+function addNewPost() {
+  title = inputTitle.value;
+  body = inputBody.value;
 
-function addNewPost(){
-  fetch('http://localhost:5000/posts', {
+  fetch("http://localhost:5000/posts", {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "application/json"
     },
-    body: JSON.stringify(data),
-    cache: "no-cache",
-    mode: "cors", 
+    body: JSON.stringify({ title, body })
+    // cache: "no-cache",
+    // mode: "cors"
   })
-  .then(res => res.json())
-  .then(() => console.log('done'))
-  .catch(err => console.log(err))
+    .then(res => {
+      inputTitle.value = "";
+      inputBody.value = "";
+      res.json();
+    })
+    .catch(err => console.log(err));
 }
 
-function deletePost(){
-  console.log('delete');
-  
+function deletePost() {
+  const sPath = document.location.pathname.split("/");
+  const id = sPath[sPath.length - 1];
+
+  fetch(`http://localhost:5000/post/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+    .then(res => {
+      window.location.replace("http://localhost:5000/posts");
+      // window.location.href = "http://stackoverflow.com";
+      console.log(res);
+    })
+    .catch(err => console.log(err));
 }
 
-function updatePost(){
-  console.log('update');
-  
+function updatePost() {
+  console.log("update");
 }
-
